@@ -1,12 +1,6 @@
-from fastapi import FastAPI
-from models import Base
-from database.database import engine
+import uvicorn
 
-app = FastAPI()
-
-Base.metadata.create_all(bind=engine)
+if __name__ == "__main__":
+    uvicorn.run("api.app:app", host="127.0.0.1", port=8000, reload=True)
 
 
-@app.get('/')
-def hello():
-    return 'hello'
