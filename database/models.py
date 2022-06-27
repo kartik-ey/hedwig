@@ -9,7 +9,7 @@ Base = declarative_base()
 class User(Base):
     __tablename__ = 'user'
     unique_id = Column(Integer, primary_key=True, index=True)
-    name = Column(String, nullable=False)
+    username = Column(String, nullable=False)
     email = Column(String, nullable=False)
     password = Column(String, nullable=False)
     avis = relationship('avis', back_populates='user')
