@@ -8,6 +8,15 @@ class CreateUser(BaseModel):
     password: str
 
 
+class ShowUser(BaseModel):
+    username: str
+    email: EmailStr
+
+    class Config:
+        orm_mode = True
 
 
+class CreateAvis(BaseModel):
+    body: str
+    user: ShowUser
 
