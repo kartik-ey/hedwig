@@ -1,7 +1,7 @@
 from fastapi import FastAPI
 from starlette.middleware.cors import CORSMiddleware
 from database.models import Base
-from database.database import engine
+from database.session import engine
 
 
 def get_application() -> FastAPI:

@@ -22,5 +22,3 @@ class Avis(Base):
     time_created = Column(DateTime(timezone=True), server_default=func.now())
     user_id = Column(Integer, ForeignKey('user.unique_id'))
     user = relationship('user', back_populates='avis')
-
-
