@@ -1,5 +1,6 @@
 from fastapi import FastAPI
 from starlette.middleware.cors import CORSMiddleware
+from api.routes.route_user import router
 from database.models import Base
 from database.session import engine
 
@@ -25,6 +26,8 @@ def get_application() -> FastAPI:
 Base.metadata.create_all(bind=engine)
 
 app = get_application()
+
+app.include_router(router)
 
 
 @app.get('/')
