@@ -7,18 +7,18 @@ Base = declarative_base()
 
 
 class User(Base):
-    __tablename__ = 'user'
-    unique_id = Column(Integer, primary_key=True, index=True)
-    username = Column(String, nullable=False)
-    email = Column(String, nullable=False)
-    password = Column(String, nullable=False)
-    avis = relationship('avis', back_populates='user')
+    __tablename__ = 'users'
+    user_id = Column(Integer, primary_key=True, index=True)
+    username = Column(String(30), nullable=False)
+    email = Column(String(40), nullable=False)
+    password = Column(String(150), nullable=False)
+    avis = relationship('Avis', back_populates='users')
 
 
 class Avis(Base):
     __tablename__ = 'avis'
-    unique_id = Column(Integer, primary_key=True, index=True)
+    avis_id = Column(Integer, primary_key=True, index=True)
     body = Column(Text, nullable=False)
     time_created = Column(DateTime(timezone=True), server_default=func.now())
-    user_id = Column(Integer, ForeignKey('user.unique_id'))
-    user = relationship('user', back_populates='avis')
+    user_id = Column(Integer, ForeignKey('users.user_id'))
+    users = relationship('User', back_populates='avis')
