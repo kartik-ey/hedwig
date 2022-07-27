@@ -5,7 +5,7 @@ from database.session import get_db
 from database.repository.users import create_new_user
 
 
-router = APIRouter()
+router = APIRouter(tags=["user"])
 
 
 @router.post('/create_user', response_model=ShowUser)
