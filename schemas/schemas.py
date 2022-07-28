@@ -1,5 +1,6 @@
 from pydantic import BaseModel, EmailStr
 from typing import Optional
+from datetime import date, time, datetime
 
 
 class CreateUser(BaseModel):
@@ -11,12 +12,25 @@ class CreateUser(BaseModel):
 class ShowUser(BaseModel):
     username: str
     email: EmailStr
+    is_active: bool
 
     class Config:
         orm_mode = True
 
 
-class CreateAvis(BaseModel):
+class AvisBase(BaseModel):
     body: str
-    user: ShowUser
+    time_created: Optional[time] = datetime.now().timetz()
+
+
+class CreateAvis(AvisBase):
+    body: str
+
+
+class ShowAvis(AvisBase):
+    body: str
+    time_created: time
+
+    class Config:
+        orm_mode = True
 

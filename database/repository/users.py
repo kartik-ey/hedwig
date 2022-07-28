@@ -8,7 +8,9 @@ def create_new_user(user: CreateUser, db: Session):
     user = User(
         username=user.username,
         email=user.email,
-        password=Hasher.hash_password(user.password))
+        password=Hasher.hash_password(user.password),
+        is_active=True,
+        is_superUser=False)
     db.add(user)
     db.commit()
     db.refresh(user)

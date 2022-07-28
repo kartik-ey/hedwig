@@ -1,6 +1,6 @@
 from fastapi import FastAPI
 from starlette.middleware.cors import CORSMiddleware
-from api.routes import route_user
+from api.routes import route_user, route_avis
 from database.models import Base
 from database.session import engine
 
@@ -28,6 +28,7 @@ Base.metadata.create_all(bind=engine)
 app = get_application()
 
 app.include_router(route_user.router)
+app.include_router(route_avis.router)
 
 
 @app.get('/')
