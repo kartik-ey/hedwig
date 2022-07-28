@@ -17,5 +17,11 @@ def create_new_user(user: CreateUser, db: Session):
     return user
 
 
+def get_user_by_id(user_id: int, db: Session):
+    user = db.query(User).filter(User.user_id == user_id).first()
+    return user
 
 
+def list_users(db: Session):
+    users = db.query(User).filter(User.is_active == True).all()
+    return users
