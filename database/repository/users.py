@@ -5,16 +5,16 @@ from hashing import Hasher
 
 
 def create_new_user(user: CreateUser, db: Session):
-    user = User(
+    new_user = User(
         username=user.username,
         email=user.email,
         password=Hasher.hash_password(user.password),
         is_active=True,
         is_superUser=False)
-    db.add(user)
+    db.add(new_user)
     db.commit()
-    db.refresh(user)
-    return user
+    db.refresh(new_user)
+    return new_user
 
 
 def get_user_by_id(user_id: int, db: Session):
@@ -25,3 +25,22 @@ def get_user_by_id(user_id: int, db: Session):
 def list_users(db: Session):
     users = db.query(User).filter(User.is_active == True).all()
     return users
+
+
+def edit_user_by_id(user_id: int, user: CreateUser, db: Session):
+    existing_user = db.query(User).filter(User.user_id == user_id)
+    if not existing_user.first():
+        return 0
+    user.__dict__.update(user_id=user_id)
+    existing_user.update(user.__dict__)
+    db.commit()
+    return 1
+
+
+def delete_user_by_id(user_id: int, db: Session):
+    existing_user = db.query(User).filter(User.user_id == user_id)
+    if not existing_user.first():
+        return 0
+    existing_user.delete(synchronize_session=False)
+    db.commit()
+    return 1
