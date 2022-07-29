@@ -11,8 +11,3 @@ class Hasher:
     @staticmethod
     def hash_password(password):
         return pwd_context.hash(password)
-
-
-# print(Hasher.hash_password('hello'))
-# print(Hasher.verify_password('hello', '$2b$12$hOhiREyAuJTMtG1yKN5dGuElT/CKuTaNWtYlwBvsEXjv0RQXcA4j2'))
-
