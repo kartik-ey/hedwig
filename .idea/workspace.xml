@@ -2,7 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="b6ee65e9-a100-4745-9f0d-1d040bab5e3b" name="Changes" comment="moved models.py to database directory">
-      <change beforePath="$PROJECT_DIR$/hashing.py" beforeDir="false" afterPath="$PROJECT_DIR$/hashing.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/routes/route_avis.py" beforeDir="false" afterPath="$PROJECT_DIR$/api/routes/route_avis.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/database/repository/avis.py" beforeDir="false" afterPath="$PROJECT_DIR$/database/repository/avis.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -12,6 +14,7 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
+        <option value="HTML File" />
         <option value="Python Script" />
       </list>
     </option>
@@ -31,6 +34,7 @@
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
     "ASKED_MARK_IGNORED_FILES_AS_EXCLUDED": "true",
+    "DefaultHtmlFileTemplate": "HTML File",
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "last_opened_file_path": "D:/hedwig",
