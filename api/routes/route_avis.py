@@ -4,15 +4,16 @@ from sqlalchemy.orm import Session
 from schemas.schemas import CreateAvis, ShowAvis
 from database.session import get_db
 from database.repository.avis import create_new_avis, get_avis_by_id, list_avis, edit_avis_by_id, delete_avis_by_id
+from database.models import User
+from api.routes.route_login import get_current_user
 
 
 router = APIRouter(tags=["avis"])
 
 
 @router.post('/create_avis', response_model=ShowAvis)
-def create_avis(avis: CreateAvis, db: Session = Depends(get_db)):
-    current_user = 1
-    avis = create_new_avis(avis=avis, db=db, user_id=current_user)
+def create_avis(avis: CreateAvis, db: Session = Depends(get_db), current_user: User = Depends(get_current_user)):
+    avis = create_new_avis(avis=avis, db=db, user_id=current_user.user_id)
     return avis
 
 
@@ -42,10 +43,14 @@ def edit_avis(avis_id: int, avis: CreateAvis, db: Session = Depends(get_db)):
 
 
 @router.delete('/delete_avis/{avis_id}')
-def delete_avis(avis_id: int, db: Session = Depends(get_db)):
-    current_user = 1
-    deleted_avis = delete_avis_by_id(avis_id=avis_id, db=db, user_id=current_user)
-    if not deleted_avis:
+def delete_avis(avis_id: int, db: Session = Depends(get_db), current_user: User = Depends(get_current_user)):
+    avis = get_avis_by_id(avis_id=avis_id, db=db)
+    if not avis:
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND,
                             detail=f"Avis with id:{avis_id} not found.")
-    return {"msg": "Successfully deleted Avis."}
+    if avis.user_id == current_user.user_id or current_user.is_superUser:
+        delete_avis_by_id(avis_id=avis_id, db=db, user_id=current_user)
+        return {"msg": f"Successfully deleted Avis by user:{current_user.username}."}
+    raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED,
+                        detail=f"Permission Denied!!")
+
