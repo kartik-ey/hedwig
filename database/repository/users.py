@@ -6,7 +6,7 @@ from hashing import Hasher
 
 def create_new_user(user: CreateUser, db: Session):
     new_user = User(
-        username=user.username,
+        username=create_username(user.username),
         email=user.email,
         password=Hasher.hash_password(user.password),
         is_active=True,
@@ -51,3 +51,7 @@ def exist_user(email: str, db: Session):
     if not existing_user.first():
         return 0
     return 1
+
+
+def create_username(username):
+    return '@'+username
