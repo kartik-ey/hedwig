@@ -9,8 +9,9 @@ Base = declarative_base()
 class User(Base):
     __tablename__ = 'users'
     user_id = Column(Integer, primary_key=True, index=True)
-    username = Column(String(30), nullable=False)
-    email = Column(String(40), nullable=False)
+    fullname = Column(String(30), nullable=False)
+    username = Column(String(30), nullable=False, unique=True)
+    email = Column(String(40), nullable=False, unique=True)
     password = Column(String(150), nullable=False)
     is_active = Column(Boolean, nullable=False)
     is_superUser = Column(Boolean, nullable=False)
