@@ -42,7 +42,8 @@ oauth2_scheme = OAuth2PasswordBearer(tokenUrl="/token")
 def get_current_user(token: str = Depends(oauth2_scheme), db: Session = Depends(get_db)):
     credential_exception = HTTPException(
         status_code=status.HTTP_401_UNAUTHORIZED,
-        detail="Could Not Validate Credentials!!")
+        detail="Could Not Validate Credentials!!",
+        headers={"WWW-Authenticate": "Bearer"})
 
     try:
         payload = jwt.decode(token, settings.SECRET_KEY, algorithms=[settings.ALGORITHM])

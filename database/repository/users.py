@@ -23,7 +23,7 @@ def get_user_by_id(user_id: int, db: Session):
 
 
 def list_users(db: Session):
-    users = db.query(User).filter(User.is_active == True).all()
+    users = db.query(User).filter(User.is_active == "True").all()
     return users
 
 
@@ -43,4 +43,11 @@ def delete_user_by_id(user_id: int, db: Session):
         return 0
     existing_user.delete(synchronize_session=False)
     db.commit()
+    return 1
+
+
+def exist_user(email: str, db: Session):
+    existing_user = db.query(User).filter(User.email == email)
+    if not existing_user.first():
+        return 0
     return 1
