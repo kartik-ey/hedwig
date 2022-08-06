@@ -29,3 +29,7 @@ class Avis(Base):
 
 class Otp(Base):
     pass
+
+
+class Following(Base):
+    pass
