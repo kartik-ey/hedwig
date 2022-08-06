@@ -25,3 +25,7 @@ class Avis(Base):
     time_created = Column(Time(timezone=True), server_default=func.now())
     user_id = Column(Integer, ForeignKey('users.user_id'))
     users = relationship('User', back_populates='avis')
+
+
+class Otp(Base):
+    pass
