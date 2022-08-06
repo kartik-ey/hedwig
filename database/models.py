@@ -15,7 +15,7 @@ class User(Base):
     password = Column(String(150), nullable=False)
     is_active = Column(Boolean, nullable=False)
     is_superUser = Column(Boolean, nullable=False)
-    avis = relationship('Avis', back_populates='users')
+    avis = relationship('Avis', back_populates='users', cascade="all, delete-orphan")
 
 
 class Avis(Base):

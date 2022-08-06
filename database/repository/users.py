@@ -6,6 +6,7 @@ from hashing import Hasher
 
 def create_new_user(user: CreateUser, db: Session):
     new_user = User(
+        fullname=user.fullname,
         username=create_username(user.username),
         email=user.email,
         password=Hasher.hash_password(user.password),

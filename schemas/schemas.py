@@ -4,6 +4,7 @@ from datetime import date, time, datetime
 
 
 class CreateUser(BaseModel):
+    fullname: str
     username: str
     email: EmailStr
     password: str
