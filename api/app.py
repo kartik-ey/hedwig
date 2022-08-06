@@ -8,7 +8,7 @@ from database.session import engine
 def get_application() -> FastAPI:
     application = FastAPI(title='hedwig')
 
-    origins = ["http://localhost:5500", ]
+    origins = ["*"]
     application.add_middleware(
         CORSMiddleware,
         allow_origins=origins,
