@@ -3,8 +3,8 @@ from typing import List
 from sqlalchemy.orm import Session
 from schemas.schemas import CreateUser, ShowUser
 from database.session import get_db
-from database.repository.users import create_new_user, get_user_by_id, list_users, edit_user_by_id, delete_user_by_id\
-    , exist_user
+from database.repository.users import create_new_user, get_user_by_id, list_users, edit_user_by_id, delete_user_by_id,\
+    exist_user
 
 
 router = APIRouter(tags=["user"])
