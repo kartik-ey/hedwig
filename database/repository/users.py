@@ -32,7 +32,7 @@ def edit_user_by_id(user_id: int, user: CreateUser, db: Session):
     existing_user = db.query(User).filter(User.user_id == user_id)
     if not existing_user.first():
         return 0
-    user.__dict__.update(user_id=user_id)
+    user.__dict__.update(user_id=user_id, password=Hasher.hash_password(user.password))
     existing_user.update(user.__dict__)
     db.commit()
     return 1
