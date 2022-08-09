@@ -32,7 +32,7 @@ def show_all_avis(db: Session = Depends(get_db)):
     new_result = []
     for users, avis in result:
         new_result.append({"username": users.username, "fullname": users.fullname, "user_id": avis.user_id,
-                           "body": avis.body, "time_created": avis.time_created})
+                           "body": avis.body, "time_created": avis.time_created, "avis_id": avis.avis_id})
 #   print(new_result)
     return new_result
 
@@ -47,14 +47,14 @@ def edit_avis(avis_id: int, avis: CreateAvis, db: Session = Depends(get_db)):
     return {"msg": "Successfully updated Avis."}
 
 
-@router.delete('/delete_avis/{avis_id}')
+@router.delete('/delete_avis/{avis_id}', status_code=status.HTTP_200_OK)
 def delete_avis(avis_id: int, db: Session = Depends(get_db), current_user: User = Depends(get_current_user)):
     avis = get_avis_by_id(avis_id=avis_id, db=db)
     if not avis:
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND,
                             detail=f"Avis with id:{avis_id} not found.")
     if avis.user_id == current_user.user_id or current_user.is_superUser:
-        delete_avis_by_id(avis_id=avis_id, db=db, user_id=current_user)
+        delete_avis_by_id(avis_id=avis_id, db=db)
         return {"msg": f"Successfully deleted Avis by user:{current_user.username}."}
     raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED,
                         detail=f"Permission Denied!!")
@@ -66,6 +66,6 @@ def get_avis_by_user(db: Session = Depends(get_db), current_user: User = Depends
     new_result = []
     for users, avis in result:
         new_result.append({"username": users.username, "fullname": users.fullname, "user_id": avis.user_id,
-                           "body": avis.body, "time_created": avis.time_created})
+                           "body": avis.body, "time_created": avis.time_created, "avis_id": avis.avis_id})
     #   print(new_result)
     return new_result

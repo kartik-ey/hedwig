@@ -1,6 +1,4 @@
 from pydantic import BaseModel, EmailStr
-from typing import Optional
-from datetime import date, time, datetime
 
 
 class CreateUser(BaseModel):
@@ -33,6 +31,7 @@ class CreateAvis(AvisBase):
 
 
 class ShowAvis(CreateAvis):
+    avis_id: int
     user_id: int
     fullname: str
     username: str

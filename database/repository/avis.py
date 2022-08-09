@@ -20,7 +20,7 @@ def get_avis_by_id(avis_id: int, db: Session):
 
 def list_avis(db: Session):
     #    avis = db.query(Avis).all()
-    avis = db.query(User, Avis).join(Avis).all()
+    avis = db.query(User, Avis).join(Avis).order_by(Avis.time_created.desc()).all()
     return avis
 
 
@@ -34,7 +34,7 @@ def edit_avis_by_id(avis_id: int, avis: CreateAvis, db: Session, user_id):
     return 1
 
 
-def delete_avis_by_id(avis_id: int, db: Session, user_id):
+def delete_avis_by_id(avis_id: int, db: Session):
     existing_avis = db.query(Avis).filter(Avis.avis_id == avis_id)
     if not existing_avis.first():
         return 0
@@ -44,5 +44,5 @@ def delete_avis_by_id(avis_id: int, db: Session, user_id):
 
 
 def get_avis_by_user_id(db: Session, user_id: int):
-    avis = db.query(User, Avis).join(Avis).filter(Avis.user_id == user_id).all()
+    avis = db.query(User, Avis).join(Avis).filter(Avis.user_id == user_id).order_by(Avis.time_created.desc()).all()
     return avis
