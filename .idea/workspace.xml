@@ -3,8 +3,10 @@
   <component name="ChangeListManager">
     <list default="true" id="b6ee65e9-a100-4745-9f0d-1d040bab5e3b" name="Changes" comment="moved models.py to database directory">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/routes/route_avis.py" beforeDir="false" afterPath="$PROJECT_DIR$/api/routes/route_avis.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/routes/route_login.py" beforeDir="false" afterPath="$PROJECT_DIR$/api/routes/route_login.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/database/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/database/models.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/repository/users.py" beforeDir="false" afterPath="$PROJECT_DIR$/database/repository/users.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/database/repository/avis.py" beforeDir="false" afterPath="$PROJECT_DIR$/database/repository/avis.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/schemas/schemas.py" beforeDir="false" afterPath="$PROJECT_DIR$/schemas/schemas.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -47,7 +49,7 @@
       <recent name="C:\Users\lapi\Desktop\tattle" />
     </key>
   </component>
-  <component name="RunManager" selected="Python.users">
+  <component name="RunManager" selected="Python.route_avis">
     <configuration name="main" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="hedwig" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -90,6 +92,27 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
+    <configuration name="route_avis" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="hedwig" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/api/routes" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/api/routes/route_avis.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
     <configuration name="users" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="hedwig" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -113,6 +136,7 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Python.route_avis" />
         <item itemvalue="Python.users" />
         <item itemvalue="Python.models" />
         <item itemvalue="Python.main" />

@@ -1,17 +1,17 @@
 from fastapi import APIRouter, Depends, HTTPException, status
 from typing import List
 from sqlalchemy.orm import Session
-from schemas.schemas import CreateAvis, ShowAvis
+from schemas.schemas import CreateAvis, ShowAvis, AvisBase
 from database.session import get_db
-from database.repository.avis import create_new_avis, get_avis_by_id, list_avis, edit_avis_by_id, delete_avis_by_id
+from database.repository.avis import create_new_avis, get_avis_by_id, list_avis, edit_avis_by_id, delete_avis_by_id, \
+    get_avis_by_user_id
 from database.models import User
 from api.routes.route_login import get_current_user
-
 
 router = APIRouter(tags=["avis"])
 
 
-@router.post('/create_avis', response_model=ShowAvis)
+@router.post('/create_avis', response_model=AvisBase)
 def create_avis(avis: CreateAvis, db: Session = Depends(get_db), current_user: User = Depends(get_current_user)):
     avis = create_new_avis(avis=avis, db=db, user_id=current_user.user_id)
     return avis
@@ -28,8 +28,13 @@ def show_avis(avis_id: int, db: Session = Depends(get_db)):
 
 @router.get('/all_avis', response_model=List[ShowAvis])
 def show_all_avis(db: Session = Depends(get_db)):
-    avis = list_avis(db=db)
-    return avis
+    result = list_avis(db=db)
+    new_result = []
+    for users, avis in result:
+        new_result.append({"username": users.username, "fullname": users.fullname, "user_id": avis.user_id,
+                           "body": avis.body, "time_created": avis.time_created})
+#   print(new_result)
+    return new_result
 
 
 @router.put('/edit_avis/{avis_id}')
@@ -54,3 +59,13 @@ def delete_avis(avis_id: int, db: Session = Depends(get_db), current_user: User 
     raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED,
                         detail=f"Permission Denied!!")
 
+
+@router.get('/avis_by_user/{user_id}', response_model=List[ShowAvis])
+def get_avis_by_user(db: Session = Depends(get_db), current_user: User = Depends(get_current_user)):
+    result = get_avis_by_user_id(user_id=current_user.user_id, db=db)
+    new_result = []
+    for users, avis in result:
+        new_result.append({"username": users.username, "fullname": users.fullname, "user_id": avis.user_id,
+                           "body": avis.body, "time_created": avis.time_created})
+    #   print(new_result)
+    return new_result

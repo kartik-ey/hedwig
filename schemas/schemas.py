@@ -23,16 +23,19 @@ class ShowUser(BaseModel):
 
 class AvisBase(BaseModel):
     body: str
-    time_created: Optional[time] = datetime.now().timetz()
+
+    class Config:
+        orm_mode = True
 
 
 class CreateAvis(AvisBase):
     body: str
 
 
-class ShowAvis(AvisBase):
-    body: str
-    time_created: time
+class ShowAvis(CreateAvis):
+    user_id: int
+    fullname: str
+    username: str
 
     class Config:
         orm_mode = True

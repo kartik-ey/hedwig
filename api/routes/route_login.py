@@ -23,7 +23,7 @@ def authenticate_user(username: str, password: str, db: Session):
     return user
 
 
-@router.post("/token", response_model=Token)
+@router.post("/token", response_model=Token, status_code=status.HTTP_202_ACCEPTED)
 def login_for_access_token(form_data: OAuth2PasswordRequestForm = Depends(), db: Session = Depends(get_db)):
     user = authenticate_user(form_data.username, form_data.password, db)
     if not user:
@@ -56,3 +56,8 @@ def get_current_user(token: str = Depends(oauth2_scheme), db: Session = Depends(
     if user is None:
         raise credential_exception
     return user
+
+
+@router.post('/logout')
+def logout():
+    return "Log out called"
