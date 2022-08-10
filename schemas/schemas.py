@@ -26,11 +26,12 @@ class AvisBase(BaseModel):
         orm_mode = True
 
 
-class CreateAvis(AvisBase):
+class EditAvis(AvisBase):
+    avis_id: int
     body: str
 
 
-class ShowAvis(CreateAvis):
+class ShowAvis(AvisBase):
     avis_id: int
     user_id: int
     fullname: str

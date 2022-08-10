@@ -1,10 +1,10 @@
 from sqlalchemy.orm import Session
-from schemas.schemas import CreateAvis
+from schemas.schemas import AvisBase
 from database.models import Avis, User
 from datetime import datetime
 
 
-def create_new_avis(avis: CreateAvis, db: Session, user_id: int):
+def create_new_avis(avis: AvisBase, db: Session, user_id: int):
     avis = Avis(**avis.dict(), user_id=user_id)
     avis.__dict__.update(time_created=datetime.utcnow())
     db.add(avis)
@@ -24,7 +24,7 @@ def list_avis(db: Session):
     return avis
 
 
-def edit_avis_by_id(avis_id: int, avis: CreateAvis, db: Session, user_id):
+def edit_avis_by_id(avis_id: int, avis: AvisBase, db: Session, user_id):
     existing_avis = db.query(Avis).filter(Avis.avis_id == avis_id)
     if not existing_avis.first():
         return 0
