@@ -16,7 +16,9 @@ router = APIRouter(tags=["login"])
 
 def authenticate_user(username: str, password: str, db: Session):
     user = get_user(username=username, db=db)
-    if not user or user.is_active is False:
+    if not user.is_active:
+        raise HTTPException(status_code=400, detail="Inactive user")
+    if not user:
         return False
     if not Hasher.verify_password(password, user.password):
         return False

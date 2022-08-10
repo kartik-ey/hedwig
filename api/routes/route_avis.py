@@ -57,7 +57,7 @@ def delete_avis(avis_id: int, db: Session = Depends(get_db), current_user: User 
     if avis.user_id == current_user.user_id or current_user.is_superUser:
         delete_avis_by_id(avis_id=avis_id, db=db)
         return {"msg": f"Successfully deleted Avis by user:{current_user.username}."}
-    raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED,
+    raise HTTPException(status_code=status.HTTP_403_FORBIDDEN,
                         detail=f"Permission Denied!!")
 
 
