@@ -32,7 +32,8 @@ def show_all_avis(db: Session = Depends(get_db)):
     new_result = []
     for users, avis in result:
         new_result.append({"username": users.username, "fullname": users.fullname, "user_id": avis.user_id,
-                           "body": avis.body, "time_created": avis.time_created, "avis_id": avis.avis_id})
+                           "body": avis.body, "time_created": avis.time_created, "avis_id": avis.avis_id, "created_on":
+                           avis.created_on})
 #   print(new_result)
     return new_result
 
@@ -66,6 +67,7 @@ def get_avis_by_user(db: Session = Depends(get_db), current_user: User = Depends
     new_result = []
     for users, avis in result:
         new_result.append({"username": users.username, "fullname": users.fullname, "user_id": avis.user_id,
-                           "body": avis.body, "time_created": avis.time_created, "avis_id": avis.avis_id})
+                           "body": avis.body, "time_created": avis.time_created, "avis_id": avis.avis_id,
+                           "created_on": avis.created_on})
     #   print(new_result)
     return new_result

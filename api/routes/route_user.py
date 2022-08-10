@@ -5,6 +5,8 @@ from schemas.schemas import CreateUser, ShowUser
 from database.session import get_db
 from database.repository.users import create_new_user, get_user_by_id, list_users, edit_user_by_id, delete_user_by_id,\
     exist_user
+from database.models import User
+from api.routes.route_login import get_current_user
 
 
 router = APIRouter(tags=["user"])
@@ -21,12 +23,12 @@ async def create_user(user: CreateUser, db: Session = Depends(get_db)):
     return user
 
 
-@router.get('/get_user/{user_id}', response_model=ShowUser)
-def get_user(user_id: int, db: Session = Depends(get_db)):
-    user = get_user_by_id(user_id=user_id, db=db)
+@router.get('/get_user', response_model=ShowUser)
+def get_user(db: Session = Depends(get_db), current_user: User = Depends(get_current_user)):
+    user = get_user_by_id(user_id=current_user.user_id, db=db)
     if not user:
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND,
-                            detail=f"User with id:{user_id} not found")
+                            detail=f"User with id:{current_user.user_id} not found")
     return user
 
 

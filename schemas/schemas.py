@@ -1,19 +1,23 @@
 from pydantic import BaseModel, EmailStr
+from datetime import datetime, date
 
 
-class CreateUser(BaseModel):
+class UserBase(BaseModel):
     fullname: str
     username: str
     email: EmailStr
+    dob: date
+
+
+class CreateUser(UserBase):
     password: str
 
 
-class ShowUser(BaseModel):
+class ShowUser(UserBase):
     user_id: int
-    fullname: str
-    username: str
-    email: EmailStr
+    created_on: date
     is_active: bool
+    is_superUser: bool
 
     class Config:
         orm_mode = True
@@ -28,7 +32,6 @@ class AvisBase(BaseModel):
 
 class EditAvis(AvisBase):
     avis_id: int
-    body: str
 
 
 class ShowAvis(AvisBase):
@@ -36,6 +39,8 @@ class ShowAvis(AvisBase):
     user_id: int
     fullname: str
     username: str
+    created_on: date
+    time_created: datetime
 
     class Config:
         orm_mode = True

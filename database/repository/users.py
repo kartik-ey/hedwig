@@ -2,6 +2,7 @@ from sqlalchemy.orm import Session
 from schemas.schemas import CreateUser
 from database.models import User
 from hashing import Hasher
+from datetime import datetime
 
 
 def create_new_user(user: CreateUser, db: Session):
@@ -10,6 +11,8 @@ def create_new_user(user: CreateUser, db: Session):
         username=create_username(user.username),
         email=user.email,
         password=Hasher.hash_password(user.password),
+        created_on=datetime.utcnow().date(),
+        dob=user.dob,
         is_active=True,
         is_superUser=False)
     db.add(new_user)

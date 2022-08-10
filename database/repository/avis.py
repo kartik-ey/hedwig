@@ -7,6 +7,7 @@ from datetime import datetime
 def create_new_avis(avis: AvisBase, db: Session, user_id: int):
     avis = Avis(**avis.dict(), user_id=user_id)
     avis.__dict__.update(time_created=datetime.utcnow())
+    avis.__dict__.update(created_on=datetime.utcnow().date())
     db.add(avis)
     db.commit()
     db.refresh(avis)
