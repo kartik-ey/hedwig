@@ -16,7 +16,7 @@ class User(Base):
     dob = Column(Date, nullable=False)
     is_active = Column(Boolean, nullable=False)
     is_superUser = Column(Boolean, nullable=False)
-    avis = relationship('Avis', back_populates='users', cascade="all, delete-orphan")
+    avis = relationship('Avis', back_populates='users', cascade="all, delete", passive_deletes=True)
 
 
 class Avis(Base):
@@ -25,7 +25,7 @@ class Avis(Base):
     body = Column(Text, nullable=False)
     time_created = Column(DateTime)
     created_on = Column(Date)
-    user_id = Column(Integer, ForeignKey('users.user_id'))
+    user_id = Column(Integer, ForeignKey('users.user_id', ondelete="CASCADE"))
     users = relationship('User', back_populates='avis')
 
 

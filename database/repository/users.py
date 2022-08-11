@@ -1,5 +1,5 @@
 from sqlalchemy.orm import Session
-from schemas.schemas import CreateUser
+from schemas.schemas import CreateUser, UserBase
 from database.models import User
 from hashing import Hasher
 from datetime import datetime
@@ -31,11 +31,11 @@ def list_users(db: Session):
     return users
 
 
-def edit_user_by_id(user_id: int, user: CreateUser, db: Session):
+def edit_user_by_id(user_id: int, user: UserBase, db: Session):
     existing_user = db.query(User).filter(User.user_id == user_id)
     if not existing_user.first():
         return 0
-    user.__dict__.update(user_id=user_id, password=Hasher.hash_password(user.password))
+    user.__dict__.update(user_id=user_id, username=create_username(user.username))
     existing_user.update(user.__dict__)
     db.commit()
     return 1
@@ -59,3 +59,8 @@ def exist_user(email: str, db: Session):
 
 def create_username(username):
     return '@'+username
+
+
+def get_username(user_id: int, db: Session):
+    username = db.query(User).with_entities(User.fullname, User.username).filter(User.user_id == user_id).first()
+    return username
