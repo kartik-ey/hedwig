@@ -3,7 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="b6ee65e9-a100-4745-9f0d-1d040bab5e3b" name="Changes" comment="moved models.py to database directory">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/api/routes/route_avis.py" beforeDir="false" afterPath="$PROJECT_DIR$/api/routes/route_avis.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/api/routes/route_login.py" beforeDir="false" afterPath="$PROJECT_DIR$/api/routes/route_login.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
