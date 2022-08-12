@@ -34,8 +34,14 @@ def get_user(db: Session = Depends(get_db), current_user: User = Depends(get_cur
 
 @router.get('/all_users', response_model=List[ShowUser])
 def get_all_users(db: Session = Depends(get_db)):
-    users = list_users(db=db)
-    return users
+    result = list_users(db=db)
+    user_list = []
+    for users in result:
+        user_list.append({"fullname": users.fullname, "username": users.username, "email": users.email,
+                          "dob": users.dob, "user_id": users.user_id, "created_on": users.created_on,
+                          "is_active": users.is_active, "is_superUser": users.is_superUser})
+    # print(user_list)
+    return user_list
 
 
 @router.put('/edit_user', status_code=status.HTTP_200_OK)
