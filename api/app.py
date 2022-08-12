@@ -24,7 +24,7 @@ def get_application() -> FastAPI:
     return application
 
 
-Base.metadata.create_all(bind=engine)
+Base.metadata.create_all(bind=engine, checkfirst=True)
 
 app = get_application()
 
