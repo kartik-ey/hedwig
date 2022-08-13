@@ -34,27 +34,27 @@ def list_users(db: Session):
 def edit_user_by_id(user_id: int, user: UserBase, db: Session):
     existing_user = db.query(User).filter(User.user_id == user_id)
     if not existing_user.first():
-        return 0
+        return False
     user.__dict__.update(user_id=user_id, username=create_username(user.username))
     existing_user.update(user.__dict__)
     db.commit()
-    return 1
+    return True
 
 
 def delete_user_by_id(user_id: int, db: Session):
     existing_user = db.query(User).filter(User.user_id == user_id)
     if not existing_user.first():
-        return 0
+        return False
     existing_user.delete(synchronize_session=False)
     db.commit()
-    return 1
+    return True
 
 
 def exist_user(email: str, db: Session):
     existing_user = db.query(User).filter(User.email == email)
     if not existing_user.first():
-        return 0
-    return 1
+        return False
+    return True
 
 
 def create_username(username):

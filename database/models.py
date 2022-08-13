@@ -27,15 +27,3 @@ class Avis(Base):
     created_on = Column(Date)
     user_id = Column(Integer, ForeignKey('users.user_id', ondelete="CASCADE"))
     users = relationship('User', back_populates='avis')
-
-
-"""
-class Otp(Base):
-    __tablename__ = 'otp'
-    pass
-
-
-class Following(Base):
-    __tablename__ = 'following'
-    pass
-"""

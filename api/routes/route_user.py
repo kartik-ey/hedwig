@@ -40,7 +40,6 @@ def get_all_users(db: Session = Depends(get_db)):
         user_list.append({"fullname": users.fullname, "username": users.username, "email": users.email,
                           "dob": users.dob, "user_id": users.user_id, "created_on": users.created_on,
                           "is_active": users.is_active, "is_superUser": users.is_superUser})
-    # print(user_list)
     return user_list
 
 

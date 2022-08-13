@@ -20,7 +20,6 @@ def get_avis_by_id(avis_id: int, db: Session):
 
 
 def list_avis(db: Session):
-    #    avis = db.query(Avis).all()
     avis = db.query(User, Avis).join(Avis).order_by(Avis.time_created.desc()).all()
     return avis
 
@@ -28,20 +27,20 @@ def list_avis(db: Session):
 def edit_avis_by_id(avis_id: int, avis: AvisBase, db: Session, user_id):
     existing_avis = db.query(Avis).filter(Avis.avis_id == avis_id)
     if not existing_avis.first():
-        return 0
+        return False
     avis.__dict__.update(user_id=user_id)
     existing_avis.update(avis.__dict__)
     db.commit()
-    return 1
+    return True
 
 
 def delete_avis_by_id(avis_id: int, db: Session):
     existing_avis = db.query(Avis).filter(Avis.avis_id == avis_id)
     if not existing_avis.first():
-        return 0
+        return False
     existing_avis.delete(synchronize_session=False)
     db.commit()
-    return 1
+    return True
 
 
 def get_avis_by_user_id(db: Session, user_id: int):

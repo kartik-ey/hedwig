@@ -17,10 +17,6 @@ def get_application() -> FastAPI:
         allow_headers=["*"],
     )
 
-    # application.add_event_handler("startup", create_start_app_handler(application))
-    # application.add_event_handler("shutdown", create_stop_app_handler(application))
-    # application.include_router(api.router, prefix="/api")
-
     return application
 
 
@@ -31,8 +27,3 @@ app = get_application()
 app.include_router(route_login.router)
 app.include_router(route_user.router)
 app.include_router(route_avis.router)
-
-
-@app.get('/')
-def hello():
-    return 'hello'
