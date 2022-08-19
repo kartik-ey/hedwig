@@ -64,5 +64,5 @@ def delete_user(db: Session = Depends(get_db), current_user: User = Depends(get_
 
 @router.get('/username')
 def getusernameby_id(db: Session = Depends(get_db), current_user: User = Depends(get_current_user)):
-    username = get_username(user_id = current_user.user_id, db=db)
+    username = get_username(user_id=current_user.user_id, db=db)
     return username
