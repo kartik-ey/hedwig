@@ -20,7 +20,7 @@ def get_avis_by_id(avis_id: int, db: Session):
 
 
 def list_avis(db: Session):
-    avis = db.query(User, Avis).join(Avis).order_by(Avis.time_created.desc()).all()
+    avis = db.query(User, Avis).join(Avis).order_by(Avis.time_created.desc()).limit(50).all()
     return avis
 
 

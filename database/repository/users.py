@@ -27,7 +27,7 @@ def get_user_by_id(user_id: int, db: Session):
 
 
 def list_users(db: Session):
-    users = db.query(User).filter(User.is_active == "True").all()
+    users = db.query(User).filter(User.is_active == "True").limit(50).all()
     return users
 
 

@@ -16,7 +16,7 @@ router = APIRouter(tags=["user"])
 async def create_user(user: CreateUser, db: Session = Depends(get_db)):
     user_exist = exist_user(user.email, db=db)
     if user_exist:
-        raise HTTPException(status_code=status.HTTP_409_CONFLICT,
+        raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST,
                             detail=f"User with email:{user.email} already exists.")
 
     user = create_new_user(user=user, db=db)
